@@ -1,40 +1,19 @@
-package net.TammamDarwish.springboot_blog_webApp.entity;
+package net.TammamDarwish.springboot_blog_webApp.dto;
 
 import java.time.LocalDateTime;
 
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
+public class PostDto {
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
-import jakarta.persistence.Table;
-@Entity
-@Table(name = "posts",schema="MYBlogWebApp")
-public class Post {
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
-	@Column(nullable=false)
 	private String title;
-	
 	private String url;
-	@Column(nullable=false)
-	@Lob
 	private String content;
 	private String shortDescription;
-	@CreationTimestamp
-	
 	private LocalDateTime createdOn;
-	@UpdateTimestamp
 	private LocalDateTime updatedOn;
-	
-	public Post(Long id, String title, String url, String content, String shortDescription, LocalDateTime createdOn,
+	public PostDto(Long id, String title, String url, String content, String shortDescription, LocalDateTime createdOn,
 			LocalDateTime updatedOn) {
-		
+		//super();
 		this.id = id;
 		this.title = title;
 		this.url = url;
@@ -43,12 +22,11 @@ public class Post {
 		this.createdOn = createdOn;
 		this.updatedOn = updatedOn;
 	}
-	private Post()
-	{
+	public PostDto() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
-
-	public Post(Builder builder) {
+	public PostDto(Builder builder) {
 		this.id = builder.id;
 		this.title = builder.title;
 		this.url = builder.url;
@@ -57,7 +35,6 @@ public class Post {
 		this.createdOn = builder.createdOn;
 		this.updatedOn = builder.updatedOn;
 	}
-
 	public Long getId() {
 		return id;
 	}
@@ -104,12 +81,6 @@ public class Post {
 	{
 		return new Builder();
 	}
-	@Override
-	public String toString() {
-		return "Post [id=" + id + ", title=" + title + ", url=" + url + ", content=" + content + ", shortDescription="
-				+ shortDescription + ", createdOn=" + createdOn + ", updatedOn=" + updatedOn + "]";
-	}
-	
 	public static final class Builder
 	{
 		private Long id;
@@ -119,64 +90,55 @@ public class Post {
 		private String shortDescription;
 		private LocalDateTime createdOn;
 		private LocalDateTime updatedOn;
+	private Builder()
+	{
 		
-
-	
-
+	}
 	
 	public Builder id(Long id)
 	{
-		this.id = id;
+		this.id= id;
 		return this;
+		
 	}
-	public Builder title(String title)
+	public Builder title (String title)
 	{
-		this.title=title;
-		return this;
+	  this .title = title;
+	  return this;
 	}
-	public Builder url(String url)
+	public Builder content (String content)
 	{
-		this.url= url;
-		return this;
+	  this .content = content;
+	  return this;
 	}
-	public Builder content(String content)
+	
+	public Builder url (String url)
 	{
-		this.content = content;
-		return this;
+	  this.url = url;
+	  return this;
 	}
 	public Builder shortDescription(String shortDescription)
 	{
-		this.shortDescription = shortDescription;
+		this.content=content;
 		return this;
 	}
+	
 	public Builder createdOn(LocalDateTime createdOn)
 	{
-		this.createdOn = createdOn;
+		this.createdOn=createdOn;
 		return this;
 	}
 	public Builder updatedOn(LocalDateTime updatedOn)
 	{
-		this.updatedOn = updatedOn;
+		this.updatedOn=updatedOn;
 		return this;
 	}
-	
-	public Post build()
+      
+	public PostDto build()
 	{
-		return new Post (this);
+		return new PostDto(this);
 	}
+	
 	}
+	
 }
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
