@@ -26,6 +26,7 @@ public class PostDto {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	// in the postDto should be No-argument constructor.
 	public PostDto(Builder builder) {
 		this.id = builder.id;
 		this.title = builder.title;
