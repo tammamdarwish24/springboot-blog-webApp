@@ -2,12 +2,17 @@ package net.TammamDarwish.springboot_blog_webApp.dto;
 
 import java.time.LocalDateTime;
 
+import jakarta.validation.constraints.NotEmpty;
+
 public class PostDto {
 
 	private Long id;
+	@NotEmpty(message = "title should not be empty")
 	private String title;
 	private String url;
+	@NotEmpty(message = "content should not be empty")
 	private String content;
+	@NotEmpty(message = "shortDescription should not be empty")
 	private String shortDescription;
 	private LocalDateTime createdOn;
 	private LocalDateTime updatedOn;
