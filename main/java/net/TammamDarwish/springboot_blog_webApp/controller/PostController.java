@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import jakarta.validation.Valid;
@@ -70,6 +71,13 @@ public class PostController {
 		   
 		   
 	   }
+	   @GetMapping("/admin/posts/{postId}/edit")
+	   public String editPostForm(@PathVariable("postId") Long postId,Model model)
+	   {
+		   PostDto postDto=postService.findPostById(postId);
+		   model.addAttribute("postDto", postDto);
+		   return "admin/edit_post";
+	   }
 	  /* we should make the validation in the PostDto object because we use it as object  in the 
 	   * create_post html file 
 	   * 
@@ -81,4 +89,28 @@ public class PostController {
 	    * 3-Enable annotation in the handler method @Valid @ModelAttribute("postDto") PostDto postDto
 	    * 4-use Binding result object and return to the same page if there is any error "admin/create_post" */
       
+	   // handler method to handle edit post form submit
+	   /* we need to store these updated information in the database*/
+	   
+	   @PostMapping("/admin/posts/{postId}")
+	   public String updatePost(@PathVariable("postId")Long postId,@Valid@ModelAttribute("postDto")PostDto postDto,
+			   Model model,BindingResult result)
+	   {
+		   if (result.hasErrors())
+		   {
+			   model.addAttribute("PostDto", postDto);
+			   return "admin/edit_post";
+		   }
+		   postDto.setId(postId);
+		   postService.updatePost(postDto);
+		   return "redirect:/admin/posts";
+		  
+	   }
+	   @GetMapping("/admin/posts/{postId}/delete")
+	   public String deletePost(@PathVariable("postId") Long postId )
+	   {
+		   postService.deletePost(postId);
+		   return "redirect:/admin/posts";
+	   }
+	   
 }

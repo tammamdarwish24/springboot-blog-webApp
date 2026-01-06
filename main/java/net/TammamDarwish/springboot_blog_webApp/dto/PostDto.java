@@ -125,7 +125,7 @@ public class PostDto {
 	}
 	public Builder shortDescription(String shortDescription)
 	{
-		this.content=content;
+		this.shortDescription=shortDescription;
 		return this;
 	}
 	
