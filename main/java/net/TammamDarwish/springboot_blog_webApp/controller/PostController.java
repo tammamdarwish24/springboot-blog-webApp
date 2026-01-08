@@ -106,6 +106,18 @@ public class PostController {
 		   return "redirect:/admin/posts";
 		  
 	   }
+	   @GetMapping("/admin/posts/{postUrl}/view")
+	   public String viewPost(@PathVariable ("postUrl")String postUrl,Model model)
+	   {
+		   PostDto postDto = postService.findPostByUrl(postUrl);
+		   model.addAttribute("postDto", postDto);
+		   
+		  return "/admin/view_post";
+		   
+	   }
+	   
+	   
+	   
 	   @GetMapping("/admin/posts/{postId}/delete")
 	   public String deletePost(@PathVariable("postId") Long postId )
 	   {

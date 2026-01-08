@@ -24,6 +24,7 @@
 <td>
 <a th:href="@{/admin/posts/{postId}/edit(postId=${post.id})}" class="btn btn-primary">Edit</a>
 <a th:href="@{/admin/posts/{postId}/delete(postId=${post.id})}" class="btn btn-danger">Delete</a>
+<a th:href="@{/admin/posts/{postUrl}/view(postUrl=${post.postUrl})}" class="btn btn-info">view</a>
 </td>
 <!-- post id should be passed dynamically  -->
 </tr>
