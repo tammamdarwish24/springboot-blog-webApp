@@ -27,7 +27,6 @@ public class Post {
 	private String content;
 	private String shortDescription;
 	@CreationTimestamp
-	
 	private LocalDateTime createdOn;
 	@UpdateTimestamp
 	private LocalDateTime updatedOn;

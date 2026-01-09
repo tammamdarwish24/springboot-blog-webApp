@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.validation.Valid;
 import net.TammamDarwish.springboot_blog_webApp.dto.PostDto;
@@ -115,7 +116,7 @@ public class PostController {
 		  return "/admin/view_post";
 		   
 	   }
-	   
+	   //handler method to handle 
 	   
 	   
 	   @GetMapping("/admin/posts/{postId}/delete")
@@ -124,5 +125,13 @@ public class PostController {
 		   postService.deletePost(postId);
 		   return "redirect:/admin/posts";
 	   }
-	   
+	   //localhost:8080/admin/posts/search?query=
+	   @GetMapping("/admin/posts/search")
+	   public String searchPosts(@RequestParam(value = "query")String query , Model model)
+	   {
+		List<PostDto> postDtos = postService.searchPosts(query);
+		model.addAttribute("posts", postDtos);
+		return "admin/posts";
+		   
+	   }
 }

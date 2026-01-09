@@ -1,10 +1,24 @@
 <!DOCTYPE html>
 <html lang = "en" xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
+<div th:replace="admin/header :: header"></div>
 <body>
+<div th:replace="admin/header :: navbar"></div>
+<div class = "container">
+<div class = "row">
+<div class = "col-md-8  offset-md-2">
+<h2 th:text="${postDto.title}"></h2>
+<hr/>
+<h2 th:text="${postDto.shortDescription}"></h2>
+<hr/>
+<div th:utext="${postDto.content}">
 
+</div>
+</div>
+
+</div>
+
+</div>
+<div th:replace="admin/footer :: footer"></div>
 </body>
+
 </html>
