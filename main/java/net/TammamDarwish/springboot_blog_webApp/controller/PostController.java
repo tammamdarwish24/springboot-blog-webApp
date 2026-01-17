@@ -134,4 +134,20 @@ public class PostController {
 		return "admin/posts";
 		   
 	   }
+	   // handler method to handle view Post Request.
+	   @GetMapping("/post/{postUrl}")
+	   private String showPost(@PathVariable("postUrl")String postUrl,Model model)
+	   {
+		   PostDto post = postService.findPostByUrl(postUrl);
+		   model.addAttribute("post", post);
+		   return "blog/blog_post";
+	   }
+	
+	   
+	   
+	   
+	   
+ 
 }
+
+
