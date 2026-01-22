@@ -33,6 +33,7 @@ public class BlogController {
 	   @GetMapping("/page/search")
 	   public String searchPosts(@RequestParam(value = "query")String query , Model model)
 	   {
+		   
 		List<PostDto> postDtos = postService.searchPosts(query);
 		model.addAttribute("posts", postDtos);
 		return "blog/view_posts";
