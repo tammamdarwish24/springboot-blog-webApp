@@ -1,5 +1,7 @@
 package net.TammamDarwish.springboot_blog_webApp.mapper;
 
+import java.util.stream.Collectors;
+
 import net.TammamDarwish.springboot_blog_webApp.dto.PostDto;
 import net.TammamDarwish.springboot_blog_webApp.entity.Post;
 
@@ -14,9 +16,8 @@ public class PostMapper {
 				.content(post.getContent()).
 				shortDescription(post.getShortDescription()).
 				createdOn(post.getCreatedOn()).
-				updatedOn(post.getUpdatedOn()).
-				build();
-		
+				updatedOn(post.getUpdatedOn()).commentsDto(post.getComments().stream().map((comment)->
+				CommentMapper.mapToCommentDto(comment)).collect(Collectors.toSet())).build();
 		return postDto;
 				
 				

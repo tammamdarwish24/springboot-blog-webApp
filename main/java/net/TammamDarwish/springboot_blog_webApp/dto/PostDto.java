@@ -1,8 +1,11 @@
 package net.TammamDarwish.springboot_blog_webApp.dto;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 import jakarta.validation.constraints.NotEmpty;
+import net.TammamDarwish.springboot_blog_webApp.entity.Comment;
 
 public class PostDto {
 
@@ -16,8 +19,9 @@ public class PostDto {
 	private String shortDescription;
 	private LocalDateTime createdOn;
 	private LocalDateTime updatedOn;
+	private Set<CommentDto> commentsDto;
 	public PostDto(Long id, String title, String url, String content, String shortDescription, LocalDateTime createdOn,
-			LocalDateTime updatedOn) {
+			LocalDateTime updatedOn,Set<CommentDto> commentsDto) {
 		//super();
 		this.id = id;
 		this.title = title;
@@ -26,6 +30,7 @@ public class PostDto {
 		this.shortDescription = shortDescription;
 		this.createdOn = createdOn;
 		this.updatedOn = updatedOn;
+		this.commentsDto = new HashSet<>(commentsDto);
 	}
 	public PostDto() {
 		super();
@@ -40,6 +45,7 @@ public class PostDto {
 		this.shortDescription = builder.shortDescription;
 		this.createdOn = builder.createdOn;
 		this.updatedOn = builder.updatedOn;
+		this.commentsDto=builder.commentsDto;
 	}
 	public Long getId() {
 		return id;
@@ -83,6 +89,20 @@ public class PostDto {
 	public void setUpdatedOn(LocalDateTime updatedOn) {
 		this.updatedOn = updatedOn;
 	}
+	public void setCommentsDto(Set<CommentDto> commentsDto) {
+		if (commentsDto!=null)
+		{ this.commentsDto = commentsDto;}
+		else
+		{
+			this.commentsDto = new HashSet<>(commentsDto);
+		}
+       
+		
+	}
+	
+	public Set<CommentDto> getCommentsDto() {
+		return commentsDto;
+	}
 	public static Builder builder()
 	{
 		return new Builder();
@@ -96,6 +116,7 @@ public class PostDto {
 		private String shortDescription;
 		private LocalDateTime createdOn;
 		private LocalDateTime updatedOn;
+	    private	Set<CommentDto> commentsDto;
 	private Builder()
 	{
 		
@@ -139,7 +160,12 @@ public class PostDto {
 		this.updatedOn=updatedOn;
 		return this;
 	}
-      
+    public Builder commentsDto(Set<CommentDto> commentsDto)
+    {
+    	this.commentsDto=new HashSet<>(commentsDto);
+    	return this;
+    }
+  
 	public PostDto build()
 	{
 		return new PostDto(this);

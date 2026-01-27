@@ -12,20 +12,24 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.validation.Valid;
+import net.TammamDarwish.springboot_blog_webApp.dto.CommentDto;
 import net.TammamDarwish.springboot_blog_webApp.dto.PostDto;
 import net.TammamDarwish.springboot_blog_webApp.entity.Post;
 import net.TammamDarwish.springboot_blog_webApp.mapper.PostMapper;
 import net.TammamDarwish.springboot_blog_webApp.repository.PostRepository;
+import net.TammamDarwish.springboot_blog_webApp.service.CommentService;
 import net.TammamDarwish.springboot_blog_webApp.service.PostService;
 
 @Controller
 public class PostController {
 	
 	private PostService postService;
+	private CommentService commentService;
 
-	public PostController(PostService postService) {
+	public PostController(PostService postService, CommentService commentService) {
 		
 		this.postService = postService;
+		this.commentService=commentService;
 	}
      //create Handler Method to handle Model and view GET the request and return Model and view
 	@GetMapping("/admin/posts")
@@ -139,11 +143,20 @@ public class PostController {
 	   private String showPost(@PathVariable("postUrl")String postUrl,Model model)
 	   {
 		   PostDto post = postService.findPostByUrl(postUrl);
+		  CommentDto commentDto = new CommentDto();
+		   model.addAttribute("commentDto", commentDto);
 		   model.addAttribute("post", post);
 		   return "blog/blog_post";
 	   }
 	   
-	   
+	   // handler method to handle list comments request.
+	   @GetMapping("/admin/posts/comments")
+	   public String postComments(Model model)
+	   {
+		List<CommentDto>  comments =  commentService.findAllComments();
+		model.addAttribute("comments", comments);
+		return "admin/comments";
+	   }
 	   
 	   
 	   

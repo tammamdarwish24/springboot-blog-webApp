@@ -2,17 +2,26 @@ package net.TammamDarwish.springboot_blog_webApp.dto;
 
 import java.time.LocalDateTime;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import net.TammamDarwish.springboot_blog_webApp.entity.Post;
+
 public class CommentDto {
 
 	private Long id;
+	@NotEmpty
 	private String name;
+	@NotEmpty(message = "email should not be empty")
+	@Email
 	private String email;
+	@NotEmpty(message = "content should not be empty")
 	private String content;
 	private LocalDateTime createdOn;
 	private LocalDateTime updatedOn;
+	//private Post post;
 	
 	public CommentDto(Long id, String name, String email, String content, LocalDateTime createdOn,
-			LocalDateTime updatedOn) {
+			LocalDateTime updatedOn,Post post) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -20,6 +29,7 @@ public class CommentDto {
 		this.content = content;
 		this.createdOn = createdOn;
 		this.updatedOn = updatedOn;
+		//this.post = post;
 	}
 	
 	public CommentDto() {
@@ -75,6 +85,15 @@ public class CommentDto {
 	public void setUpdatedOn(LocalDateTime updatedOn) {
 		this.updatedOn = updatedOn;
 	}
+	
+//	public Post getPost() {
+//		return post;
+//	}
+//
+//	public void setPost(Post post) {
+//		this.post = post;
+//	}
+
 	public static final class Builder
 	{
 		private Long id;
@@ -83,6 +102,7 @@ public class CommentDto {
 		private String content;
 		private LocalDateTime createdOn;
 		private LocalDateTime updatedOn;
+		private Post post;
 		
 		public Builder id(Long id)
 		{
@@ -119,6 +139,7 @@ public class CommentDto {
 			this.updatedOn=updatedOn;
 			return this;
 		}
+		
 		public CommentDto build() {
 			return new CommentDto(this);
 		}

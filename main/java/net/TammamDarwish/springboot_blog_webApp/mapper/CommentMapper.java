@@ -10,7 +10,7 @@ public class CommentMapper {
 	public static CommentDto mapToCommentDto(Comment comment)
 	{
 		CommentDto commentDto = CommentDto.builder().id(comment.getId()).
-				name(comment.getName()).content(comment.getContent()).
+				name(comment.getName()).email(comment.getEmail()).content(comment.getContent()).
 				createdOn(comment.getCreatedOn()).updatedOn(comment.getUpdatedOn()).build();
 		return commentDto;	
 		
@@ -19,7 +19,7 @@ public class CommentMapper {
 	public static Comment mapToComment(CommentDto commentDto)
 	{
 		Comment comment = Comment.builder().id(commentDto.getId()).
-				name(commentDto.getName()).content(commentDto.getContent()).
+				name(commentDto.getName()).email(commentDto.getEmail()).content(commentDto.getContent()).
 				createdOn(commentDto.getCreatedOn()).updatedOn(commentDto.getUpdatedOn()).build();
 		return comment;
 	}

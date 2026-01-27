@@ -35,6 +35,13 @@ public class Comment {
     @JoinColumn(name = "post_id",nullable=false)
     private Post post;
     
+    
+	public Post getPost() {
+		return post;
+	}
+	public void setPost(Post post) {
+		this.post = post;
+	}
 	public Long getId() {
 		return id;
 	}
@@ -93,6 +100,7 @@ public class Comment {
 		this.content = builder.content;
 		this.createdOn = builder.createdOn;
 		this.updatedOn = builder.updatedOn;
+		this.post = builder.post;
 	}
     public static Builder builder()
     {
@@ -106,6 +114,7 @@ public class Comment {
 		private String content;
 		private LocalDateTime createdOn;
 		private LocalDateTime updatedOn;
+		private Post post;
 		
 		public  Builder id(Long id)
 		{
@@ -137,7 +146,12 @@ public class Comment {
 			this.updatedOn =updatedOn;
 			return this;
 		}
-	
+	    
+		public Builder post(Post post)
+		{
+			this.post = post ;
+			return this;
+		}
 		public Comment build()
 		{
 			return new Comment(this);
