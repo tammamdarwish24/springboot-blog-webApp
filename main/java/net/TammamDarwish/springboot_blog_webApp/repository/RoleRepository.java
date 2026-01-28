@@ -1,0 +1,11 @@
+package net.TammamDarwish.springboot_blog_webApp.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import net.TammamDarwish.springboot_blog_webApp.entity.Role;
+
+public interface RoleRepository extends JpaRepository<Role,Long> {
+
+	
+	Role findByName(String name);
+}

@@ -157,8 +157,15 @@ public class PostController {
 		model.addAttribute("comments", comments);
 		return "admin/comments";
 	   }
+	   // handler method to handle delete button.
 	   
-	   
+	   @GetMapping("/admin/posts/comments/{commentId}")
+	   public String deleteComment(@PathVariable("commentId")Long id )
+	   { 
+		   commentService.delete(id);
+		return "redirect:/admin/posts/comments" ;
+		   
+	   }
 	   
  
 }
