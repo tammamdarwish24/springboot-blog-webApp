@@ -1,15 +1,25 @@
 package net.TammamDarwish.springboot_blog_webApp.dto;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+
 public class RegistrationDto {
 	private Long id;
+	@NotEmpty
 	private String firstName;
+	@NotEmpty
 	private String lastName;
+	@NotEmpty(message = "Email should not be empty or null")
+	@Email
 	private String email;
+	@NotEmpty(message = "password should not be empty")
 	private String password;
 	public RegistrationDto(Long id, String firstName, String lastName, String email, String password) {
 		super();
 		this.id = id;
+		
 		this.firstName = firstName;
+		
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;

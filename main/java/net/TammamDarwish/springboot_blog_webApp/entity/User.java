@@ -33,6 +33,12 @@ public class User {
     inverseJoinColumns={@JoinColumn(name="role_id",referencedColumnName="id")})
 	private List<Role> roles = new ArrayList<>();
 	
+	public List<Role> getRoles() {
+		return roles;
+	}
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
+	}
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
