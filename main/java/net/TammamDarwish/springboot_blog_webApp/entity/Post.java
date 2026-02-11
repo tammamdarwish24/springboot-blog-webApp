@@ -14,7 +14,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -38,9 +40,12 @@ public class Post {
 	private LocalDateTime updatedOn;
 	@OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
 	private Set<Comment> comments = new HashSet<>();
+	@ManyToOne
+	@JoinColumn(name="createdBy",nullable=false)// foreign key reference User id pk
+	private User createdBy;
 
 	public Post(Long id, String title, String url, String content, String shortDescription, LocalDateTime createdOn,
-			LocalDateTime updatedOn, Set<Comment> comments) {
+			LocalDateTime updatedOn, Set<Comment> comments,User createdBy) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -50,6 +55,15 @@ public class Post {
 		this.createdOn = createdOn;
 		this.updatedOn = updatedOn;
 		this.comments = new HashSet<>(comments);
+		this.createdBy=createdBy;
+	}
+
+	public User getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(User createdBy) {
+		this.createdBy = createdBy;
 	}
 
 	public Post() {

@@ -8,19 +8,24 @@ import org.springframework.stereotype.Service;
 
 import net.TammamDarwish.springboot_blog_webApp.dto.PostDto;
 import net.TammamDarwish.springboot_blog_webApp.entity.Post;
+import net.TammamDarwish.springboot_blog_webApp.entity.User;
 import net.TammamDarwish.springboot_blog_webApp.mapper.PostMapper;
 import net.TammamDarwish.springboot_blog_webApp.repository.PostRepository;
+import net.TammamDarwish.springboot_blog_webApp.repository.UserRepository;
 import net.TammamDarwish.springboot_blog_webApp.service.PostService;
+import net.TammamDarwish.springboot_blog_webApp.util.SecurityUtils;
 @Service
 public class PostServiceImpl implements PostService {
 
 	@Autowired
 	private PostRepository postRepository;
+	private UserRepository userRepository;
 	
 	
-	public PostServiceImpl(PostRepository postRepository) {
+	public PostServiceImpl(PostRepository postRepository,UserRepository userRepository) {
 		super();
 		this.postRepository = postRepository;
+		this.userRepository=userRepository;
 	}
 
 
@@ -36,7 +41,10 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	public void createPost(PostDto postDto) {
+		String email = SecurityUtils.getCurrentUser().getUsername();
+		User user = userRepository.findByEmail(email);
 		Post post = PostMapper.mapToPost(postDto);
+		post.setCreatedBy(user);
 		postRepository.save(post);
 		
 	}
@@ -53,7 +61,10 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	public void updatePost(PostDto postDto) {
+		String email = SecurityUtils.getCurrentUser().getUsername();
+		User user = userRepository.findByEmail(email);
 		Post post = PostMapper.mapToPost(postDto);
+		post.setCreatedBy(user);
 		postRepository.save(post);
 		// we can use this save method for both save ans update operation.
 		
