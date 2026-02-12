@@ -1,0 +1,8 @@
+This is Blog web application based on springboot3 and thymeleaf3 . The home page under this url localhost:8080 contains all the blog posts.
+Any user can visit and read this posts and add comments for these posts.
+the user also can use search bar to search for a particular post.The guest user can write blog post after he registers for blog post first through the register link.
+After the user registers he can navigate tothe login.After the user login he can navigate to the create NewPost tab in the navigation bar and create many posts.
+the post contains three sections the title,description and content.Here we used ciki.The Guest User can view, update,delete the post.
+Apart from that we allow the guest user to see the comments for the blogpost and the guest user can delete the comment for the post.the guest user can use logout tab to
+  logout the application.
+The admin user can access and view  to all posts, and all comments and can update,delete them.So we have three users Admin,guest and reader user
